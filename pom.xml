@@ -11,7 +11,7 @@
 	<groupId>com.klef.jfsd.sdp</groupId>
 	<artifactId>User</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>User</name>
 	<description>SDP Project</description>
 	<url/>
