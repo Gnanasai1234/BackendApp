@@ -50,5 +50,49 @@ public class WebConfig implements WebMvcConfigurer {
         .allowedMethods("GET", "POST", "PUT", "DELETE")
         .allowedHeaders("*")
         .allowCredentials(true);
+        
+        
+        
+        registry.addMapping("/user/**")
+        .allowedOrigins("https://sweet-chebakia-2e68c1.netlify.app/")
+        .allowedMethods("GET", "POST", "PUT", "DELETE")
+        .allowedHeaders("*")
+        .allowCredentials(true);
+
+registry.addMapping("/admin/**")
+        .allowedOrigins("https://sweet-chebakia-2e68c1.netlify.app/")
+        .allowedMethods("GET", "POST", "PUT", "DELETE")
+        .allowedHeaders("*")
+        .allowCredentials(true);
+
+registry.addMapping("/food/**")
+        .allowedOrigins("https://sweet-chebakia-2e68c1.netlify.app/")
+        .allowedMethods("GET", "POST", "PUT", "DELETE")
+        .allowedHeaders("*")
+        .allowCredentials(true);
+
+registry.addMapping("/diet/**")
+.allowedOrigins("https://sweet-chebakia-2e68c1.netlify.app/")
+.allowedMethods("GET", "POST", "PUT", "DELETE")
+.allowedHeaders("*")
+.allowCredentials(true);
+
+registry.addMapping("/exercise/**")
+.allowedOrigins("https://sweet-chebakia-2e68c1.netlify.app/")
+.allowedMethods("GET", "POST", "PUT", "DELETE")
+.allowedHeaders("*")
+.allowCredentials(true);
+
+registry.addMapping("/article/**")
+.allowedOrigins("https://sweet-chebakia-2e68c1.netlify.app/")
+.allowedMethods("GET", "POST", "PUT", "DELETE")
+.allowedHeaders("*")
+.allowCredentials(true);
+
+registry.addMapping("/userexercise/**")
+.allowedOrigins("https://sweet-chebakia-2e68c1.netlify.app/")
+.allowedMethods("GET", "POST", "PUT", "DELETE")
+.allowedHeaders("*")
+.allowCredentials(true);
     }
 }
