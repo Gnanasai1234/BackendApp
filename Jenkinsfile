@@ -1,39 +1,60 @@
 pipeline {
     agent any
 
-    parameters {
-        string(name: 'BACKEND_URL', defaultValue: 'http://localhost:8080', description: 'Backend API URL')
+    tools {
+        maven 'Maven_3.9.6' // Must match your Jenkins Maven installation name
+        jdk 'Java_17'       // Must match your Jenkins JDK installation name
     }
 
     environment {
-        BACKEND_URL = "${params.BACKEND_URL}"
+        APP_NAME = "my-backend-app"
+        JAR_FILE = "target/*.jar"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/Gnanasai1234/BackendApp.git'
+                git branch: 'master',
+                    url: 'https://github.com/your-username/your-repo.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo "Using Backend URL: ${BACKEND_URL}"
-                sh "./mvnw clean package -DskipTests"
+                sh 'mvn clean install -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
-                sh "./mvnw test"
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package -DskipTests'
             }
         }
 
         stage('Deploy') {
-            steps {
-                echo "Deploying application with backend URL: ${BACKEND_URL}"
-                // Example: java -jar target/*.jar &
+            when {
+                branch 'master'
             }
+            steps {
+                echo "Deploying ${APP_NAME}..."
+                // Example: Copy JAR to server
+                // sh 'scp target/my-backend-app.jar user@server:/path/to/deploy'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Build completed successfully!"
+        }
+        failure {
+            echo "Build failed!"
         }
     }
 }
