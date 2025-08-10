@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven_3.9.6'   // Name from Jenkins Global Tool Config
-        jdk 'Java_17'         // Name from Jenkins Global Tool Config
+        maven 'Maven_3.9.6' // Must match the name in Jenkins Global Tool Configuration
+        jdk 'Java_17'       // Must match the name in Jenkins Global Tool Configuration
     }
 
     environment {
@@ -18,15 +18,9 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Test') {
             steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                sh 'mvn clean package'
             }
         }
 
@@ -39,10 +33,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Build completed successfully!"
+            echo "✅ Backend build completed successfully!"
         }
         failure {
-            echo "❌ Build failed. Check logs."
+            echo "❌ Backend build failed. Please check the logs."
         }
     }
 }
