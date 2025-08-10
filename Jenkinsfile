@@ -12,30 +12,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Gnanasai1234/BackendApp.git'
+                git branch: 'master', url: 'https://github.com/Gnanasai1234/BackendApp.git'
             }
         }
 
         stage('Build') {
             steps {
                 echo "Using Backend URL: ${BACKEND_URL}"
-                sh """
-                export BACKEND_URL=${BACKEND_URL}
-                ./gradlew build
-                """
+                sh "./mvnw clean package -DskipTests"
             }
         }
 
         stage('Test') {
             steps {
-                sh './gradlew test'
+                sh "./mvnw test"
             }
         }
 
         stage('Deploy') {
             steps {
                 echo "Deploying application with backend URL: ${BACKEND_URL}"
-                // deployment steps here
+                // Example: java -jar target/*.jar &
             }
         }
     }
